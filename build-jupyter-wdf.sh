@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t jupyter-wdf .
+docker build -t jupyter-wdf:noroot .
