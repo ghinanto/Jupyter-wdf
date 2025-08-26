@@ -61,3 +61,9 @@ RUN cd wdf && python setup.py  install &&\
 #switch back to non root user
 USER jovyan
 
+# Install ipykernel in the venv if not already present (add to requirements.txt if preferred)
+RUN pip install ipykernel
+
+# Register the venv as a Jupyter kernel
+RUN python -m ipykernel install --user --name myvenv --display-name "Python (myvenv)"
+
