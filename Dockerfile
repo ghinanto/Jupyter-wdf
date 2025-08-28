@@ -51,20 +51,19 @@ RUN git clone https://github.com/elenacuoco/p4TSA && cd p4TSA && cmake CMakeList
 
 RUN /sbin/ldconfig 
 
-#install wdpipe
-#RUN mkdir tmp1/
+#install wdf
 RUN git clone https://gitlab.com/wdfpipe/wdf.git
-#ADD . tmp1/
 RUN cd wdf && python setup.py  install &&\
     cd .. && rm -fr wdf/ 
 
-RUN chown -R jovyan:users /home/jovyan/work
 #switch back to non root user
 USER jovyan
 
 # Install ipykernel in the venv if not already present (add to requirements.txt if preferred)
 RUN pip install ipykernel
-
 # Register the venv as a Jupyter kernel
 RUN python -m ipykernel install --user --name myvenv --display-name "Python (myvenv)"
 
+# this is to let user add packages avoiding redoing previous steps when rebuilding image
+COPY requirements_additions.txt .
+RUN pip3 install -r requirements_additions.txt
