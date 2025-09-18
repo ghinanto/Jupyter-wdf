@@ -1,1 +1,11 @@
 matplotlib
+pandas
+networkx
+scipy
+ipysigma
+scikit-learn
+torch
+torchvision
+torch-geometric
+pycbc==2.8
+statsmodels
